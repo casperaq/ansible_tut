@@ -1,0 +1,19 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: update repo
+    yum:
+      name: '*'
+      state: latest
+      update_cache: yes
+      update_only: yes
+
+  - name: Remove packages not needed anymore
+    yum:
+      autoremove: yes
+
+  - name: Reboot when packages were updated
+    reboot:
